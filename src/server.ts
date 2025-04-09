@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
+import productRouter from './routes/product.routes';
 dotenv.config()
 
 // Create server
@@ -9,10 +10,12 @@ const app = express();
 // Middleware
 app.use(express.json());
 
+app.use('/products', productRouter)
+
 // Connect to MongoDB and Start Server
 const PORT = process.env.PORT || 3000;
 mongoose
-  .connect("mongodb+srv://<db_user>:<db_password>@ciccc.o8yo3tc.mongodb.net/<db_name>?retryWrites=true&w=majority&appName=<cluster_name>")
+  .connect("mongodb+srv://store-admin:f0wXozA2ra72eh5v@cluster0.lphqn3f.mongodb.net/store?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`));
